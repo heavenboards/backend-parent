@@ -30,6 +30,7 @@
         <testcontainers.version>1.19.5</testcontainers.version>
         <spring.docker-compose.version>3.1.1</spring.docker-compose.version>
         <spring.cloud.version>4.1.0</spring.cloud.version>
+        <rest-assured.version>5.4.0</rest-assured.version>
     </properties>
 
     <dependencies>
@@ -92,6 +93,12 @@
             <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
             <version>${testcontainers.posrgresql.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
             <scope>test</scope>
         </dependency>
 
