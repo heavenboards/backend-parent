@@ -203,6 +203,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
             </plugin>
 
             <!-- Плагин для добавления git submodules в кодовую базу -->
@@ -257,8 +260,8 @@
                 <configuration>
                     <from>
                         <auth>
-                            <username>${env.CI_REGISTRY_USER}</username>
-                            <password>${env.CI_REGISTRY_PASSWORD}</password>
+                            <username>${{ vars.CI_REGISTRY_USER }}</username>
+                            <password>${{ vars.CI_REGISTRY_PASSWORD }}</password>
                         </auth>
                         <image>openjdk:21-jdk-bullseye</image>
                     </from>
