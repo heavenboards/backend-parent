@@ -267,7 +267,7 @@
                             <username>${env.CI_REGISTRY_USER}</username>
                             <password>${env.CI_REGISTRY_PASSWORD}</password>
                         </auth>
-                        <image>registry.hub.docker.com/pyankovdaniil/${project.build.finalName}</image>
+                        <image>registry.hub.docker.com/heavenboards/${project.build.finalName}</image>
                         <tags>
                             <tag>${project.version}</tag>
                         </tags>
