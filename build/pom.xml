@@ -260,15 +260,15 @@
                 <configuration>
                     <from>
                         <auth>
-                            <username>${{ vars.CI_REGISTRY_USER }}</username>
-                            <password>${{ vars.CI_REGISTRY_PASSWORD }}</password>
+                            <username>${registryUsername}</username>
+                            <password>${registryPassword}</password>
                         </auth>
                         <image>openjdk:21-jdk-bullseye</image>
                     </from>
                     <to>
                         <auth>
-                            <username>${env.CI_REGISTRY_USER}</username>
-                            <password>${env.CI_REGISTRY_PASSWORD}</password>
+                            <username>${registryUsername}</username>
+                            <password>${registryPassword}</password>
                         </auth>
                         <image>registry.hub.docker.com/heavenboards/${project.build.finalName}</image>
                         <tags>
