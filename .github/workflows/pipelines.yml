@@ -1,4 +1,4 @@
-name: 🔥 Сборка и тесты МР-а
+name: 🔥 Сборка, тесты и деплой
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - '**'
 
 jobs:
-  user-service:
+  user-service-test:
     runs-on: ubuntu-latest
     steps:
       - name: 👉🏼 Переключаемся на файлы проекта
@@ -37,8 +37,24 @@ jobs:
           ls
           cd ./user-service
           git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"
+          git submodule update --init --remote --recursive
+          git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
-  project-service:
+  user-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: user-service-test
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  user-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: user-service-dockerize
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  project-service-test:
     runs-on: ubuntu-latest
     steps:
       - name: 👉🏼 Переключаемся на файлы проекта
@@ -69,8 +85,24 @@ jobs:
           ls
           cd ./project-service
           git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"
+          git submodule update --init --remote --recursive
+          git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
-  composer-service:
+  project-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: project-service-test
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  project-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: project-service-dockerize
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  composer-service-test:
     runs-on: ubuntu-latest
     steps:
       - name: 👉🏼 Переключаемся на файлы проекта
@@ -101,8 +133,24 @@ jobs:
           ls
           cd ./composer-service
           git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"
+          git submodule update --init --remote --recursive
+          git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
-  board-service:
+  composer-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: composer-service-test
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  composer-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: composer-service-dockerize
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  board-service-test:
     runs-on: ubuntu-latest
     steps:
       - name: 👉🏼 Переключаемся на файлы проекта
@@ -133,8 +181,24 @@ jobs:
           ls
           cd ./board-service
           git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"
+          git submodule update --init --remote --recursive
+          git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
-  task-service:
+  board-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: board-service-test
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  board-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: board-service-dockerize
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  task-service-test:
     runs-on: ubuntu-latest
     steps:
       - name: 👉🏼 Переключаемся на файлы проекта
@@ -165,4 +229,20 @@ jobs:
           ls
           cd ./task-service
           git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"
+          git submodule update --init --remote --recursive
+          git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
+  task-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: task-service-test
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
+  task-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs: task-service-dockerize
+    steps:
+      - name: 👉🏼 Устанавливаем sshpass
+        run: sudo apt update && sudo apt install -y sshpass
