@@ -41,6 +41,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
   user-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: user-service-test
     steps:
@@ -77,6 +78,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw -DskipTests -DregistryUsername=${{ vars.CI_REGISTRY_USER }} -DregistryPassword='${{ vars.CI_REGISTRY_PASSWORD }}' clean install
   user-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: user-service-dockerize
     steps:
@@ -132,6 +134,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
   project-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: project-service-test
     steps:
@@ -168,6 +171,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw -DskipTests -DregistryUsername=${{ vars.CI_REGISTRY_USER }} -DregistryPassword='${{ vars.CI_REGISTRY_PASSWORD }}' clean install
   project-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: project-service-dockerize
     steps:
@@ -223,6 +227,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
   composer-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: composer-service-test
     steps:
@@ -259,6 +264,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw -DskipTests -DregistryUsername=${{ vars.CI_REGISTRY_USER }} -DregistryPassword='${{ vars.CI_REGISTRY_PASSWORD }}' clean install
   composer-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: composer-service-dockerize
     steps:
@@ -314,6 +320,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
   board-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: board-service-test
     steps:
@@ -350,6 +357,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw -DskipTests -DregistryUsername=${{ vars.CI_REGISTRY_USER }} -DregistryPassword='${{ vars.CI_REGISTRY_PASSWORD }}' clean install
   board-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: board-service-dockerize
     steps:
@@ -405,6 +413,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw clean package
   task-service-dockerize:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: task-service-test
     steps:
@@ -441,6 +450,7 @@ jobs:
           git submodule foreach 'git checkout ${GITHUB_REF##*/} && git pull || echo "In ${sm_path} branch ${GITHUB_REF##*/} not found"'
           ./mvnw -DskipTests -DregistryUsername=${{ vars.CI_REGISTRY_USER }} -DregistryPassword='${{ vars.CI_REGISTRY_PASSWORD }}' clean install
   task-service-deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     needs: task-service-dockerize
     steps:
