@@ -34,6 +34,8 @@
         <swagger.request.validator.version>2.40.0</swagger.request.validator.version>
         <springdoc.openapi.version>2.0.2</springdoc.openapi.version>
         <jib-maven-plugin.version>3.4.1</jib-maven-plugin.version>
+        <feign.okhttp.version>10.12</feign.okhttp.version>
+        <feign.jackson.version>10.12</feign.jackson.version>
     </properties>
 
     <dependencies>
@@ -189,12 +191,12 @@
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-okhttp</artifactId>
-            <version>10.12</version>
+            <version>${feign.okhttp.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-jackson</artifactId>
-            <version>10.12</version>
+            <version>${feign.jackson.version}</version>
         </dependency>
 
         <!-- Lombok -->
